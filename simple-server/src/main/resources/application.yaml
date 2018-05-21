@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: discovery-server
+logging:
+  pattern:
+    console: "%d{yy-MM-dd E HH:mm:ss.SSS} %highlight(%-5p) ${PID} --- %clr([%8.15t]){cyan} %highlight(%logger{36}){blue} : %m %n"
+  level:
+    org.springframework.web: INFO
+
+server:
+  port: ${PORT:8888}
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

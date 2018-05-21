@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: discovery-client
+logging:
+  pattern:
+    console: "%d{yy-MM-dd E HH:mm:ss.SSS} %highlight(%-5p) ${PID} --- %clr([%8.15t]){cyan} %highlight(%logger{36}){blue} : %m %n"
+  level:
+    org.springframework.web: INFO
+
+server:
+  port: 807${CLIENT_ID}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URL:http://localhost:8888/eureka/}
+  instance:
+    instanceId: ${spring.application.name}-${CLIENT_ID}
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'

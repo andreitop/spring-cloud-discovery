@@ -1,0 +1,29 @@
+### Code-Java ###
+
+.project
+.classpath
+factoryConfiguration.json
+
+### Java ###
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+#IntelliJ files
+**/*.iml
+**/.idea
+**/.gradle
+
+### Java-Web ###
+## ignoring target file
+target/

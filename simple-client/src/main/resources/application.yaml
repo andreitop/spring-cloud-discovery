@@ -14,9 +14,14 @@ eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_URL:http://localhost:8888/eureka/}
+      registryFetchIntervalSeconds: 3
+      shouldDisableDelta: true
   instance:
     instanceId: ${spring.application.name}-${CLIENT_ID}
     hostname: localhost
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+
 
 management:
   endpoint:

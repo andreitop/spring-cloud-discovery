@@ -9,14 +9,26 @@ logging:
 
 server:
   port: 807${CLIENT_ID}
+  ssl:
+    enabled: true
+    keyStore: classpath:client.p12
+    keyStorePassword: 123456
+    keyStoreType: PKCS12
+    keyAlias: client
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URL:http://localhost:8888/eureka/}
+      defaultZone: ${EUREKA_URL:https://localhost:8443/eureka/}
   instance:
     instanceId: ${spring.application.name}-${CLIENT_ID}
     hostname: localhost
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
+    statusPageUrl: https://localhost:${server.port}/actuator/info
+    healthCheckUrl: https://localhost:${server.port}/actuator/health
+    homePageUrl: https://localhost:${server.port}/check
 
 management:
   endpoint:
@@ -26,3 +38,5 @@ management:
     web:
       exposure:
         include: '*'
+info:
+  connection: "This connection is secured!"

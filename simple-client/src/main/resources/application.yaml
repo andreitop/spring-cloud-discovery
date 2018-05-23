@@ -6,18 +6,6 @@ logging:
     console: "%d{yy-MM-dd E HH:mm:ss.SSS} %highlight(%-5p) ${PID} --- %clr([%8.15t]){cyan} %highlight(%logger{36}){blue} : %m %n"
   level:
     org.springframework.web: INFO
-
-server:
-  port: 807${CLIENT_ID}
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URL:http://localhost:8888/eureka/}
-  instance:
-    instanceId: ${spring.application.name}-${CLIENT_ID}
-    hostname: localhost
-
 management:
   endpoint:
     shutdown:
@@ -26,3 +14,30 @@ management:
     web:
       exposure:
         include: '*'
+---
+spring:
+  profiles: zone1
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8888/eureka/,http://localhost:8889/eureka/,http://localhost:8890/eureka/
+server:
+  port: ${PORT:8071}
+---
+spring:
+  profiles: zone2
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8889/eureka/,http://localhost:8890/eureka/,http://localhost:8888/eureka/
+server:
+  port: ${PORT:8072}
+---
+spring:
+  profiles: zone3
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8890/eureka/,http://localhost:8888/eureka/,http://localhost:8889/eureka/
+server:
+  port: ${PORT:8073}

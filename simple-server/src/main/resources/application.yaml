@@ -6,15 +6,42 @@ logging:
     console: "%d{yy-MM-dd E HH:mm:ss.SSS} %highlight(%-5p) ${PID} --- %clr([%8.15t]){cyan} %highlight(%logger{36}){blue} : %m %n"
   level:
     org.springframework.web: INFO
-
-server:
-  port: ${PORT:8888}
-
+---
+spring:
+  profiles: peer1
 eureka:
   instance:
     hostname: localhost
+    metadataMap:
+      zone: zone1
   client:
-    registerWithEureka: false
-    fetchRegistry: false
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://localhost:8889/eureka/,http://localhost:8890/eureka/
+server:
+  port: ${PORT:8888}
+---
+spring:
+  profiles: peer2
+eureka:
+  instance:
+    hostname: localhost
+    metadataMap:
+      zone: zone2
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8890/eureka/,http://localhost:8888/eureka/
+server:
+  port: ${PORT:8889}
+---
+spring:
+  profiles: peer3
+eureka:
+  instance:
+    hostname: localhost
+    metadataMap:
+      zone: zone3
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8889/eureka/,http://localhost:8888/eureka/
+server:
+  port: ${PORT:8890}

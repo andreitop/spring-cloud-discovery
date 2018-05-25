@@ -13,6 +13,6 @@ public class ClientController {
 
     @GetMapping("/ping")
     public String ping() {
-        return "From zone" + zone;
+        return "From " + zone;
     }
 }

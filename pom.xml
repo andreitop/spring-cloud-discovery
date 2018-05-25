@@ -57,5 +57,6 @@
     <modules>
         <module>simple-client</module>
         <module>simple-server</module>
+        <module>simple-gateway</module>
     </modules>
 </project>

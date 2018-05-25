@@ -1,0 +1,22 @@
+logging:
+  pattern:
+    console: "%d{yy-MM-dd E HH:mm:ss.SSS} %highlight(%-5p) ${PID} --- %clr([%8.15t]){cyan} %highlight(%logger{36}){blue} : %m %n"
+  level:
+    org.springframework.web: INFO
+spring:
+  application:
+    name: gateway-proxy
+
+zuul:
+  prefix: /api
+  routes:
+    client:
+      path: /client/**
+      serviceId: discovery-client
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8888/eureka/,http://localhost:8889/eureka/
+    registerWithEureka: false
+server:
+  port: ${PORT:8010}

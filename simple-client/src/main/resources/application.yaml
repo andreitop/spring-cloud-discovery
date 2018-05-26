@@ -18,6 +18,9 @@ management:
 spring:
   profiles: zone1
 eureka:
+  instance:
+    metadataMap:
+      zone: zone1
   client:
     serviceUrl:
       defaultZone: http://localhost:8888/eureka/,http://localhost:8889/eureka/,http://localhost:8890/eureka/
@@ -27,6 +30,9 @@ server:
 spring:
   profiles: zone2
 eureka:
+  instance:
+    metadataMap:
+      zone: zone2
   client:
     serviceUrl:
       defaultZone: http://localhost:8889/eureka/,http://localhost:8890/eureka/,http://localhost:8888/eureka/
@@ -36,6 +42,9 @@ server:
 spring:
   profiles: zone3
 eureka:
+  instance:
+    metadataMap:
+      zone: zone3
   client:
     serviceUrl:
       defaultZone: http://localhost:8890/eureka/,http://localhost:8888/eureka/,http://localhost:8889/eureka/
